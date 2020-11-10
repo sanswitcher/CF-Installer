@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # fixed values: ftp-protocol to transfer the files
 #               destination filename: hda1_installer3.dsk
 #               PLATFORM=SWBD34
