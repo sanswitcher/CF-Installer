@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 mount /dev/sdb1 /mnt1
 mount /dev/sdb2 /mnt2
 mount /home/a/install_ohne_switch/hda1_installer3.dsk /mnt
