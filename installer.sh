@@ -5,7 +5,8 @@
 FS='ext3'
 # PLATFORM=SWBD34 see: switch-types-blads-ids-product-names.pdf
 # PLATFORM=SWBD71
-PLATFORM=SWBD34
+# PLATFORM=SWBD34
+PLATFORM=SWBD109
 truncate -s 500M hda1_installer3.dsk
 TARGET_DEV=hda1_installer3.dsk
 mke2fs -F -g32768 -b4096 -j $TARGET_DEV
@@ -50,25 +51,20 @@ function putit()
 wget -a /var/log/wget_clean.log -T 60 --tries=3 -N -nH -P /mnt/$PLATFORM $WGET_PATH/$path/$fn
 cw=`pwd`
 cd /mnt
-rpm2cpio /mnt/$PLATFORM/$fn | cpio -idm --quiet
+rpm2cpio /mnt/$PLATFORM/$fn | cpio -idm --make-directories --unconditional --extract-over-symlinks
 cd $cw
 }
 
-filename=/$PLATFORM/release.plist
+tail -c +289 /$PLATFORM/release.plist > /$PLATFORM/release.plist1
+filename=/$PLATFORM/release.plist1
 echo filename: $filename
 
 n=1
 while read line
 do
-if [ $n = 1 ];then
-  l1=${line#*common}
-  line="common$l1"
-  echo Extracting $line
-  n=2
-else
   echo Extracting $line
   putit $line
-fi
+
 done < $filename
 
     echo "Updating the file system table..."
