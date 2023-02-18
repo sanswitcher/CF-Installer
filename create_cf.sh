@@ -1,11 +1,14 @@
 #!/bin/bash
 mount /dev/sdb1 /mnt1
 mount /dev/sdb2 /mnt2
-mount /home/a/install_ohne_switch/hda1_installer3.dsk /mnt
+mount hda1_installer3.dsk /mnt
 echo copy files from hda1_installer3.dsk to partition 1
-cd /mnt ; tar cf - . | (cd /mnt1; tar xf -)
+cd /mnt
+tar cf - . | (cd /mnt1; tar xf -)
+sync
 echo copy files from hda1_installer3.dsk to partition 2
 tar cf - . | (cd /mnt2; tar xf -)
+sync
 # create bindata.bin and fill it with fixed data
 awk 'BEGIN {printf("babeface000000010000000000000000\n")}' | xxd -r -p > /home/a/bindata.bin
 #get the number of hdparm entries
@@ -28,7 +31,8 @@ cp /home/a/bindata1.bin /mnt2/boot/zImage.tree.initrd.map
 addr1=`hdparm --fibmap /mnt1/boot/zImage.tree.initrd.map | awk 'FNR>4 {printf("ATA()0x%08x\n",$2)}'`
 addr2=`hdparm --fibmap /mnt2/boot/zImage.tree.initrd.map | awk 'FNR>4 {printf("ATA()0x%08x\n",$2)}'`
 echo "Enter the following command on your switch console:"
-echo "setenv OSLoader=$addr1;$addr2"
+echo "setenv OSLoader \"$addr1;$addr2\""
+echo "setenv OSRootPartition \"hda1;hda2\""
 umount /dev/sdb1
 umount /dev/sdb2
 
