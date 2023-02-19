@@ -33,6 +33,8 @@ addr2=`hdparm --fibmap /mnt2/boot/zImage.tree.initrd.map | awk 'FNR>4 {printf("A
 echo "Enter the following command on your switch console:"
 echo "setenv OSLoader \"$addr1;$addr2\""
 echo "setenv OSRootPartition \"hda1;hda2\""
+echo "saveenv"
+echo "reset"
 umount /dev/sdb1
 umount /dev/sdb2
 
