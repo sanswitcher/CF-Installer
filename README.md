@@ -21,6 +21,8 @@ The map-file contains the CRC-32 checksum of the map-file written to the CF. The
 Use the command: firmwarecleaninstall.
 
 5)Equipment licenses are stored in the following files:
+
 /etc/Fabos/license/licensesdb
 /etc/Fabos/license/licenses
+
 Theoretically, on a damaged device they can be detected by HEX-headers.
