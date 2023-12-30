@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Reading names of partitons in Compact Flash(example: sda1 and sda2):"
+echo "Write names of partitons in Compact Flash(example: sda1 and sda2):"
 read 'Partition 1:' sdx1
 read 'Partition 2:' sdx2
 
