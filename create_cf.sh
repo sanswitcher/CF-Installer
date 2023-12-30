@@ -25,7 +25,7 @@ hdparm --fibmap /mnt1/boot/zImage.tree.initrd | awk 'FNR>4 {sum++} END {printf("
 awk 'BEGIN {printf("000000000000000000000000\n")}' | xxd -r -p >> /home/a/bindata.bin
 #put hdparm numbers into the bindata.bin file
 hdparm --fibmap /mnt1/boot/zImage.tree.initrd | awk 'FNR>4 {printf("%08x %08x\n",$2,$4)}' | xxd -r -p >> /home/a/bindata.bin
-#fill bindata.bin with zeros until 1k
+#fill bindata.bin with zeros until 512b
 xxd -ps -c 1 /home/a/bindata.bin | awk '{sum++} END {for (i=sum;i<512;i++) printf("00\n")}' | xxd -r -p >> /home/a/bindata.bin
 
 #produce the checksum
@@ -51,8 +51,8 @@ hdparm --fibmap /mnt2/boot/zImage.tree.initrd | awk 'FNR>4 {sum++} END {printf("
 awk 'BEGIN {printf("000000000000000000000000\n")}' | xxd -r -p >> /home/a/bindata.bin
 #put hdparm numbers into the bindata.bin file
 hdparm --fibmap /mnt2/boot/zImage.tree.initrd | awk 'FNR>4 {printf("%08x %08x\n",$2,$4)}' | xxd -r -p >> /home/a/bindata.bin
-#fill bindata.bin with zeros until 1k
-xxd -ps -c 1 /home/a/bindata.bin | awk '{sum++} END {for (i=sum;i<1024;i++) printf("00\n")}' | xxd -r -p >> /home/a/bindata.bin
+#fill bindata.bin with zeros until 512b
+xxd -ps -c 1 /home/a/bindata.bin | awk '{sum++} END {for (i=sum;i<512;i++) printf("00\n")}' | xxd -r -p >> /home/a/bindata.bin
 
 #produce the checksum
 sum="0x"$(xxd -g 4 /home/a/bindata.bin | awk '{$2=strtonum("0x" $2);$3=strtonum("0x" $3);$4=strtonum("0x" $4);$5=strtonum("0x" $5);sum=sum+$2+$3+$4+$5} END {printf("%08x\n",sum)}')
