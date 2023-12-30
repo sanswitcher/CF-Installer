@@ -1,7 +1,7 @@
 # CF-Installer
 These scripts help to create a bootable cf-drive for brocade switches on linux machines.
 
-Please read the pdf-document "How to install the brocade OS on an empty CF drive.pdf"
+Please read the pdf-document "How to install the brocade OS on an empty CF drive.pdf" and P.S.
 
 # P.S.
 1)You need to create partitions on a Compact Flash Drive using the fdisk utility!
