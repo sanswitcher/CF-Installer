@@ -3,7 +3,7 @@
 #               destination filename: hda1_installer3.dsk
 #               PLATFORM=SWBD34
 FS='ext3'
-echo "Reading number of SWBD platform. Exemple: SWBD109. See: switch-types-blads-ids-product-names.pdf"
+echo "Write number of SWBD platform. Exemple: SWBD109. See: switch-types-blads-ids-product-names.pdf"
 read 'Platform:' PLATFORM
 truncate -s 500M hda1_installer3.dsk
 TARGET_DEV=hda1_installer3.dsk
